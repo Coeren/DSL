@@ -14,9 +14,30 @@
           }
         },
         "Then" : {
-          "SetContext" : {
-            "Name" : "Result",
-            "Value" : "Success"
+          "If" : {
+            "Left" : {
+              "Use" : {
+                "Value" : "22"
+              }
+            },
+            "Condition" : "Less",
+            "Right" : {
+              "ReadContext" : {
+                "Value" : "ContextVar2"
+              }
+            },
+            "Then" : {
+              "SetContext" : {
+                "Name" : "Result",
+                "Value" : "Success"
+              }
+            },
+            "Else" : {
+              "SetContext" : {
+                "Name" : "Result",
+                "Value" : "Semifailure"
+              }
+            }
           }
         },
         "Else" : {

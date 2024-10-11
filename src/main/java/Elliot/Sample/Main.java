@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Hashtable<String, String> hashtable = new Hashtable<>();
         hashtable.put("ContextVar1", "2");
+        hashtable.put("ContextVar2", "20");
         JsonReader reader = new JsonReader(new SampleContext(hashtable));
 
         Rule rule;
