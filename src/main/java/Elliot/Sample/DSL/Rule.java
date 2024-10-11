@@ -19,6 +19,6 @@ public class Rule {
         return res;
     }
 
-    @JsonProperty("Actions")
+    @JsonProperty("Rule")
     private List<Operation> ops;
 }

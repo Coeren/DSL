@@ -1,50 +1,24 @@
 {
-  "Actions" : [
+  "Rule" : [
     {
       "If" : {
-        "Left" : {
-          "ReadContext" : {
-            "Value" : "ContextVar1"
-          }
-        },
+        "Left" : { "ReadContext" : { "Value" : "ContextVar1" } },
         "Condition" : "Equal",
-        "Right" : {
-          "Use" : {
-            "Value" : "1"
-          }
-        },
+        "Right" : { "Use" : { "Value" : "1" } },
         "Then" : {
           "If" : {
-            "Left" : {
-              "Use" : {
-                "Value" : "22"
-              }
-            },
+            "Left" : { "Use" : { "Value" : "22" } },
             "Condition" : "Less",
-            "Right" : {
-              "ReadContext" : {
-                "Value" : "ContextVar2"
-              }
-            },
+            "Right" : { "ReadContext" : { "Value" : "ContextVar2" } },
             "Then" : {
-              "SetContext" : {
-                "Name" : "Result",
-                "Value" : "Success"
-              }
+              "SetContext" : { "Name" : "Result", "Value" : "Success" }
             },
             "Else" : {
-              "SetContext" : {
-                "Name" : "Result",
-                "Value" : "Semifailure"
-              }
-            }
+              "SetContext" : { "Name" : "Result", "Value" : "Semifailure" } }
           }
         },
         "Else" : {
-          "SetContext" : {
-            "Name" : "Result",
-            "Value" : "Failure"
-          }
+          "SetContext" : { "Name" : "Result", "Value" : "Failure" }
         }
       }
     }
