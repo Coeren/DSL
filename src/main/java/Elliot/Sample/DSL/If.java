@@ -11,10 +11,16 @@ public class If implements Operation {
 
     @Override
     public void validate() throws ValidationException {
-        if (left == null) throw new ValidationException("Empty value for \"If\" operation");
-        if (right == null) throw new ValidationException("Empty value for \"If\" operation");
-        if (condition == null) throw new ValidationException("Empty value for \"If\" operation");
-        if (thenOp == null) throw new ValidationException("Empty value for \"If\" operation");
+        if (left == null) throw new ValidationException("Empty left value for \"If\" operation");
+        if (right == null) throw new ValidationException("Empty right value for \"If\" operation");
+        if (condition == null) throw new ValidationException("Empty condition for \"If\" operation");
+        if (thenOp == null) throw new ValidationException("Empty then for \"If\" operation");
+        if (elseOp == null) throw new ValidationException("Null else in \"If\" operation");
+
+        left.validate();
+        right.validate();
+        thenOp.validate();
+        elseOp.validate();
     }
 
     @Override
@@ -36,5 +42,5 @@ public class If implements Operation {
     @JsonProperty("Then")
     private Operation thenOp;
     @JsonProperty("Else")
-    private Operation elseOp;
+    private Operation elseOp = new Nop();
 }

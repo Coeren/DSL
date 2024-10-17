@@ -7,7 +7,7 @@ import java.util.Dictionary;
 public class SampleContext implements Context {
     @Override
     public String readValue(String name) {
-        return map.get(name);
+        return map.get(name) == null ? "" : map.get(name);
     }
 
     @Override
