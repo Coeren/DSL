@@ -1,6 +1,7 @@
 package Elliot.Sample.DSL;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class In implements Operation {

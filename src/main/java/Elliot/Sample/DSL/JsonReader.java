@@ -20,6 +20,14 @@ public class JsonReader {
         return rule;
     }
 
+    public Operation readFileOp(String fileName) throws IOException, ValidationException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        Operation op = mapper.readValue(new File(fileName), Operation.class);
+        op.validate();
+
+        return op;
+    }
     @Getter
     private static Context context;
 }

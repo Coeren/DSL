@@ -1,0 +1,39 @@
+{
+  "MatchIf" : {
+    "Or" : { "Operands" : [
+      {
+        "ParamInList" : {
+          "transaction.mcc" : [ 8211, 8220, 8241, 8244, 8249, 8299, 8351 ]
+        }
+      },
+      {
+        "And" : { "Operands" : [
+          {
+            "ParamInList" : {
+              "transaction.mcc" : [ 3900 ]
+            }
+          },
+          {
+            "ParamInList" : {
+              "transaction.merchantname" : [ "yandex*8229*praktikum", "yandex*8299*uchebnik" ]
+            }
+          }
+        ] }
+      },
+      {
+        "And" : { "Operands" : [
+          {
+            "ParamInList" : {
+              "transaction.mcc" : [ 3991 ]
+            }
+          },
+          {
+            "ParamInList" : {
+              "transaction.merchantname" : [ "YANDEX*8299*ЕNGLISH", "SBER*8299*CampusSberUniver" ]
+            }
+          }
+        ] }
+      }
+    ] }
+    }
+}

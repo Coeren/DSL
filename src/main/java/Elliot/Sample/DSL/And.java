@@ -7,7 +7,7 @@ import java.util.List;
 public class And implements Operation {
     @Override
     public void validate() throws ValidationException {
-        if (ops == null) throw new ValidationException("Empty Or");
+        if (ops == null) throw new ValidationException("Empty And");
         for (Operation op : ops)
             op.validate();
     }

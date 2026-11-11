@@ -1,0 +1,8 @@
+{
+  "MatchIf" : {
+    "In" : {
+      "Test" : { "Use" : { "Value" : "transaction.mcc" } },
+      "Values" : [ 3991, "transaction.mcc" ]
+    }
+  }
+}

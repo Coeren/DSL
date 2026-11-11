@@ -2,7 +2,6 @@ package Elliot.Sample.DSL;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = If.class),
@@ -14,9 +13,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(In.class),
         @JsonSubTypes.Type(SetCalcContext.class),
         @JsonSubTypes.Type(Divide.class),
-        @JsonSubTypes.Type(Multiply.class)
+        @JsonSubTypes.Type(Multiply.class),
+        @JsonSubTypes.Type(MatchIf.class),
+        @JsonSubTypes.Type(ParamInList.class)
 })
 public interface Operation {
     void validate() throws ValidationException;
     String run();
 }
+
