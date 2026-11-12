@@ -1,9 +1,11 @@
 package Elliot.Sample.DSL;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.List;
 
+@JsonDeserialize(using = AndDeserializer.class)
 public class And implements Operation {
     @Override
     public void validate() throws ValidationException {
@@ -18,6 +20,10 @@ public class And implements Operation {
             if (op.run().equals("False")) return "False";
 
         return "True";
+    }
+
+    public void setOps(List<Operation> ops) {
+        this.ops = ops;
     }
 
     @JsonProperty("Operands")
