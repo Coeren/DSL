@@ -1,10 +1,8 @@
 package Elliot.Sample.DSL;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -18,7 +16,7 @@ import java.util.Map;
 
 public class OrDeserializer extends JsonDeserializer<Or> {
     @Override
-    public Or deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Or deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         Or or = new Or();
         List<Operation> ops = new ArrayList<>();
         ArrayNode node = p.readValueAsTree();
