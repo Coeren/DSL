@@ -1,0 +1,143 @@
+{
+  "LoyaltyPrograms" : [
+    {
+      "Spasibo" : {
+        "Categories" : [
+          {
+            "Name" : "SEGMENTS_LOY_AZS",
+            "MatchIf" : {
+              "Or" : [
+                {
+                  "And" : [
+                    {
+                      "ParamInList" : {
+                        "transaction.mcc" : [ 3900 ]
+                      }
+                    },
+                    {
+                      "ParamInList" : {
+                        "transaction.merchantname" : [ "yandex*8229*praktikum", "yandex*8299*uchebnik" ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "And" : [
+                    {
+                      "ParamInList" : {
+                        "transaction.mcc" : [ 3991 ]
+                      }
+                    },
+                    {
+                      "ParamInList" : {
+                        "transaction.merchantname" : [ "YANDEX*8299*ЕNGLISH", "SBER*8299*CampusSberUniver" ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "ParamInList" : {
+                    "transaction.mcc" : [ 8211, 8220, 8241, 8244, 8249, 8299, 8351 ]
+                  }
+                },
+                {
+                  "Use" : { "Value" : "123" }
+                }
+              ]
+            }          }
+        ],
+        "CommonRules" : [],
+        "Privileges" : [
+          {
+            "Id" : 123,
+            "Kind" : "BASE_PARTNER_PRIV",
+            "Segments" : [ ],
+            "PresentationPriority" : "100",
+            "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
+            "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
+            "Enabled" : "True",
+            "Trigger" : {
+              "Type" : "Transaction",
+              "And" : [
+                {
+                  "ParamInList" : {
+                    "Category" : [ "SEGMENTS_LOY_AZS" ]
+                  }
+                },
+                {
+                  "ThroughPartnerInfra" : {
+                    "PartnerId" : 123
+                  }
+                }
+              ]
+            },
+            "Action" : {
+              "Straight" : {
+                "CreditClient": {
+                  "Amount": "100",
+                  "Limit" : {
+                    "Type" : "Partner",
+                    "Period" : "Month",
+                    "Units" : "Roubles",
+                    "Value" : 1000000
+                  },
+                  "PromoId": 123,
+                  "IfSeveralPrivilegesTriggered" : "Credit",
+                  "FinanceId" : 123
+                }
+              },
+              "Backward" : {
+                "AntiPromoId": 124
+              }
+            }
+          },
+          {
+            "Id" : 12344,
+            "Kind" : "OFFER_SPASIBO",
+            "Segments" : [ 12, 456 ],
+            "ProcessingPriority" : 1,
+            "NeedRounding" : "True",
+            "PresentationPriority" : "100",
+            "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
+            "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
+            "Enabled" : "True",
+            "Trigger" : {
+              "Type" : "Transaction",
+              "ParamInList" : {
+                "Category" : [ "SEGMENTS_LOY_AZS" ]
+              }
+            },
+            "Action" : {
+              "Straight" : {
+                "CreditClient": {
+                  "Percent": {
+                    "Fraction" : 150,
+                    "RoundDown" : {
+                      "transaction.sum" : 100
+                    }
+                  },
+                  "PromoId": 1234,
+                  "IfSeveralPrivilegesTriggered" : {
+                    "Complementary" : [ "SPASIBO_OFFER", "PARTNER_SPASIBO_OFFER" ],
+                    "Choose" : "MaxAmount"
+                  },
+                  "Limit" : {
+                    "Type" : "Segment",
+                    "Period" : "Month",
+                    "Units" : "Bonus",
+                    "Value" : 1000
+                  },
+                  "FinanceId" : 345
+                }
+              },
+              "Backward" : {
+                "AntiPromoId": 1244
+              }
+            }
+          }
+        ],
+        "PrivilegeGroups" : []
+      }
+    }
+  ]
+}
