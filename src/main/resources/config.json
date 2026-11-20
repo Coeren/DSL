@@ -75,12 +75,7 @@
               "Straight" : {
                 "CreditClient": {
                   "Amount": "100",
-                  "Limit" : {
-                    "Type" : "Partner",
-                    "Period" : "Month",
-                    "Units" : "Roubles",
-                    "Value" : 1000000
-                  },
+                  "Limits" : [ "BURGER_KING" ],
                   "PromoId": 123,
                   "IfSeveralPrivilegesTriggered" : "Credit",
                   "FinanceId" : 123
@@ -121,12 +116,7 @@
                     "Complementary" : [ "SPASIBO_OFFER", "PARTNER_SPASIBO_OFFER" ],
                     "Choose" : "MaxAmount"
                   },
-                  "Limit" : {
-                    "Type" : "Segment",
-                    "Period" : "Month",
-                    "Units" : "Bonus",
-                    "Value" : 1000
-                  },
+                  "Limits" : [ "SPASIBO", "TRAVEL_SPASIBO" ],
                   "FinanceId" : 345
                 }
               },
@@ -136,7 +126,43 @@
             }
           }
         ],
-        "PrivilegeGroups" : []
+        "PrivilegeGroups" : [],
+        "Limits" : {
+          "Segmential" : [
+            {
+              "Name" : "SPASIBO",
+              "Unit" : "Bonus",
+              "Operation" : "Credit",
+              "Value" : 1000,
+              "Period" : "Month"
+            }
+          ],
+          "Privilegical" : [
+            {
+              "Name": "TRAVEL_SPASIBO",
+              "Unit": "Bonus",
+              "Operation": "Credit",
+              "Value": 1000,
+              "Period": "Month"
+            }
+          ],
+          "Customer" : [
+            {
+              "Name" : "BURGER_KING",
+              "Unit" : "Purchases",
+              "Operation" : "Credit",
+              "Value" : 7,
+              "Period" : "Day"
+            },
+            {
+              "Name" : "GLOBAL_DEBIT_LIMIT",
+              "Unit" : "Bonus",
+              "Operation" : "Debit",
+              "Value" : 10000,
+              "Period" : "Month"
+            }
+          ]
+        }
       }
     }
   ]
