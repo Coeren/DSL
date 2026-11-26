@@ -52,7 +52,7 @@
             "Id" : 123,
             "Kind" : "BASE_PARTNER_PRIV",
             "Segments" : [ ],
-            "PresentationPriority" : "100",
+            "PresentationPriority" : 100,
             "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
             "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
             "Enabled" : "True",
@@ -74,8 +74,15 @@
             "Action" : {
               "Straight" : {
                 "CreditClient": {
-                  "Amount": "100",
-                  "Limits" : [ "BURGER_KING" ],
+                  "Amount": 100,
+                  "Limit" : {
+                    "Counter" : "BURGER_KING",
+                    "ExactlyEqual" : 7
+                  },
+                  "IncreaseCounter" : {
+                    "Name" : "BURGER_KING",
+                    "Value" : "1"
+                  },
                   "PromoId": 123,
                   "IfSeveralPrivilegesTriggered" : "Credit",
                   "FinanceId" : 123
@@ -92,7 +99,7 @@
             "Segments" : [ 12, 456 ],
             "ProcessingPriority" : 1,
             "NeedRounding" : "True",
-            "PresentationPriority" : "100",
+            "PresentationPriority" : 100,
             "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
             "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
             "Enabled" : "True",
@@ -111,12 +118,19 @@
                       "transaction.sum" : 100
                     }
                   },
+                  "IncreaseCounter" : {
+                    "Name" : "SPASIBO_SEGMENT_BONUS_SUM",
+                    "Value" : "BONUS_AMOUNT"
+                  },
+                  "Limit" : {
+                    "Counter" : "SPASIBO_SEGMENT_BONUS_SUM",
+                    "LessOrEqual" : 3000
+                  },
                   "PromoId": 1234,
                   "IfSeveralPrivilegesTriggered" : {
                     "Complementary" : [ "SPASIBO_OFFER", "PARTNER_SPASIBO_OFFER" ],
                     "Choose" : "MaxAmount"
                   },
-                  "Limits" : [ "SPASIBO", "TRAVEL_SPASIBO" ],
                   "FinanceId" : 345
                 }
               },
@@ -127,42 +141,28 @@
           }
         ],
         "PrivilegeGroups" : [],
-        "Limits" : {
-          "Segmential" : [
-            {
-              "Name" : "SPASIBO",
-              "Unit" : "Bonus",
-              "Operation" : "Credit",
-              "Value" : 1000,
-              "Period" : "Month"
-            }
-          ],
-          "Privilegical" : [
-            {
-              "Name": "TRAVEL_SPASIBO",
-              "Unit": "Bonus",
-              "Operation": "Credit",
-              "Value": 1000,
-              "Period": "Month"
-            }
-          ],
-          "Customer" : [
-            {
-              "Name" : "BURGER_KING",
-              "Unit" : "Purchases",
-              "Operation" : "Credit",
-              "Value" : 7,
-              "Period" : "Day"
-            },
-            {
-              "Name" : "GLOBAL_DEBIT_LIMIT",
-              "Unit" : "Bonus",
-              "Operation" : "Debit",
-              "Value" : 10000,
-              "Period" : "Month"
-            }
-          ]
-        }
+        "Counters" : [
+          {
+            "Name" : "SPASIBO_SEGMENT_BONUS_SUM",
+            "Period" : "Month"
+          },
+          {
+            "Name": "TRAVEL_SPASIBO_BONUS_SUM",
+            "Period": "Month"
+          },
+          {
+            "Name" : "BURGER_KING",
+            "Period" : "Day"
+          },
+          {
+            "Name" : "MONTHLY_POS",
+            "Period" : "Month"
+          },
+          {
+            "Name" : "TRANSACTION_30_DAYS_MOVING_COUNT",
+            "Period" : "Moving_30_Days"
+          }
+        ]
       }
     }
   ]
