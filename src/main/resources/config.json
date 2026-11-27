@@ -39,12 +39,10 @@
                   "ParamInList" : {
                     "transaction.mcc" : [ 8211, 8220, 8241, 8244, 8249, 8299, 8351 ]
                   }
-                },
-                {
-                  "Use" : { "Value" : "123" }
                 }
               ]
-            }          }
+            }
+          }
         ],
         "CommonRules" : [
           {
@@ -56,7 +54,7 @@
                     "ParamInList" : { "transaction.mcc" : [ 5262, 5297, 5298, 5300, 5964 ] }
                   },
                   {
-                    "ParamInList" : { "card.type" : [ "Аэрофлот", "Аэрофлот Голд" ] }
+                    "ParamInList" : { "card.productCode" : [ "Аэрофлот", "Аэрофлот Голд" ] }
                   }
                 ]
               }
@@ -129,7 +127,6 @@
             "Kind" : "OFFER_SPASIBO",
             "Segments" : [ 12, 456 ],
             "ProcessingPriority" : 1,
-            "NeedRounding" : "True",
             "PresentationPriority" : 100,
             "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
             "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
@@ -150,7 +147,7 @@
                   },
                   "IncreaseCounter" : {
                     "Name" : "SPASIBO_SEGMENT_BONUS_SUM",
-                    "Value" : "BONUS_AMOUNT"
+                    "Value" : "BonusAmount"
                   },
                   "Limit" : {
                     "Counter" : "SPASIBO_SEGMENT_BONUS_SUM",
@@ -174,22 +171,32 @@
         "Counters" : [
           {
             "Name" : "SPASIBO_SEGMENT_BONUS_SUM",
+            "Level" : "Segment",
             "Period" : "Month"
           },
           {
             "Name": "TRAVEL_SPASIBO_BONUS_SUM",
+            "Level": "Privilege",
+            "Period": "Month"
+          },
+          {
+            "Name": "TRAVEL_SPASIBO_CUSTOMER_BONUS_SUM",
+            "Level": "PrivilegeCustomer",
             "Period": "Month"
           },
           {
             "Name" : "BURGER_KING",
+            "Level" : "Customer",
             "Period" : "Day"
           },
           {
             "Name" : "MONTHLY_POS",
+            "Level" : "Customer",
             "Period" : "Month"
           },
           {
             "Name" : "TRANSACTION_30_DAYS_MOVING_COUNT",
+            "Level" : "Customer",
             "Period" : "Moving_30_Days"
           }
         ]
