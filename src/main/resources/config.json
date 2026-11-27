@@ -46,7 +46,23 @@
               ]
             }          }
         ],
-        "CommonRules" : [],
+        "CommonRules" : [
+          {
+            "Name" : "SPASIBO_3_RULES",
+            "Trigger" : {
+              "Not" : {
+                "Or" : [
+                  {
+                    "ParamInList" : { "transaction.mcc" : [ 5262, 5297, 5298, 5300, 5964 ] }
+                  },
+                  {
+                    "ParamInList" : { "card.type" : [ "Аэрофлот", "Аэрофлот Голд" ] }
+                  }
+                ]
+              }
+            }
+          }
+        ],
         "Privileges" : [
           {
             "Id" : 123,
@@ -73,11 +89,26 @@
             },
             "Action" : {
               "Straight" : {
-                "CreditClient": {
-                  "Amount": 100,
-                  "Limit" : {
-                    "Counter" : "BURGER_KING",
-                    "ExactlyEqual" : 7
+                "CreditClient" : {
+                  "Amount" : {
+                    "If" : {
+                      "And" : [
+                        { "LessOrEqual" : [ { "Counter" : "BURGER_KING" }, { "Value" : 7 } ] },
+                        { "Greater" : [ { "Counter" : "BURGER_KING" }, { "Value" : 3 } ] }
+                      ],
+                      "Then" : { "Value" : "100" },
+                      "Else" : {
+                        "If" : {
+                          "Greater" : [ { "Counter" : "BURGER_KING" }, { "Value" : 7 } ],
+                          "Then" : {
+                            "Percent" : {
+                              "Target" : { "transaction.sum" : 100 },
+                              "Fraction" : 100
+                            }
+                          }
+                        }
+                      }
+                    }
                   },
                   "IncreaseCounter" : {
                     "Name" : "BURGER_KING",
@@ -103,6 +134,7 @@
             "StartDate" : "2023-01-01 00:00:00 +0000 UTC",
             "EndDate" : "2024-01-01 00:00:00 +0000 UTC",
             "Enabled" : "True",
+            "CommonRules" : [ "SPASIBO_3_RULES" ],
             "Trigger" : {
               "Type" : "Transaction",
               "ParamInList" : {
@@ -112,11 +144,9 @@
             "Action" : {
               "Straight" : {
                 "CreditClient": {
-                  "Percent": {
-                    "Fraction" : 150,
-                    "RoundDown" : {
-                      "transaction.sum" : 100
-                    }
+                  "Percent" : {
+                    "Target" : { "RoundDown" : { "transaction.sum" : 100 } },
+                    "Fraction" : 150
                   },
                   "IncreaseCounter" : {
                     "Name" : "SPASIBO_SEGMENT_BONUS_SUM",
